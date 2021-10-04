@@ -1,6 +1,6 @@
 body {
-  font-family: sans-serif;
-  background-color: #eeeeee;
+  font-family: 'Roboto Slab', serif;
+  background-color: #ffffff;
 }
 
 .file-upload {
@@ -14,11 +14,11 @@ body {
   width: 100%;
   margin: 0;
   color: #fff;
-  background: #1fb264;
+  background: #fc7d57;
   border: none;
   padding: 10px;
   border-radius: 4px;
-  border-bottom: 4px solid #15824b;
+  border-bottom: 4px solid #fc7d57;
   transition: all 0.2s ease;
   outline: none;
   text-transform: uppercase;
@@ -26,7 +26,7 @@ body {
 }
 
 .file-upload-btn:hover {
-  background: #1aa059;
+  background: #fc7d57;
   color: #ffffff;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -55,14 +55,14 @@ body {
 
 .image-upload-wrap {
   margin-top: 20px;
-  border: 4px dashed #1fb264;
+  border: 4px dashed #fc7d57;
   position: relative;
 }
 
 .image-dropping,
 .image-upload-wrap:hover {
-  background-color: #1fb264;
-  border: 4px dashed #ffffff;
+  background-color: #91a9c9;
+  border: 1.5px dashed #ffffff;
 }
 
 .image-title-wrap {
@@ -77,7 +77,7 @@ body {
 .drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
-  color: #15824b;
+  color: #7270e6;
   padding: 60px 0;
 }
 
@@ -113,4 +113,83 @@ body {
 .remove-image:active {
   border: 0;
   transition: all 0.2s ease;
+}
+
+.nav-distance {
+  padding: 2.1% 7.7%;
+}
+
+.navbar-light .navbar-brand {
+  line-height: 1.68;
+  text-align: left;
+  color: #35465d;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: #ffffff;
+}
+
+.section {
+  margin-top: 100px;
+}
+
+.title {
+  line-height: 1.67;
+  text-align: center;
+  color: #35465d;
+}
+
+.subtitle {
+  line-height: 1.53;
+  text-align: center;
+  color: #35465d;
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 10px;
+  }
+  .navbar-brand {
+    font-size: 2rem;
+  }
+}
+.chrisYoon-link {
+  font-size: 1rem;
+  line-height: 1.71;
+  text-align: center;
+  color: #35465d;
+}
+
+.chrisYoon-cover {
+  margin-top: 200px;
+}
+
+.file-upload {
+  margin: 0 auto;
+  padding: 10% 0;
+  border-radius: 10px;
+  border: solid 1.5px #f6f7fa;
+  background-color: #f6f7fa;
+}
+
+.image-upload-wrap {
+  width: 70%;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 10px;
+  border: dashed 1.5px #35465d;
+  background-color: #ffffff;
+}
+
+.upload-img {
+  margin-top: 30px;
+  width: 10%;
+  object-fit: contain;
+}
+
+.upload-text {
+  width: 50%;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 auto;
 }
