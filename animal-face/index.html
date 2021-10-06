@@ -90,10 +90,6 @@
       <h2 class="subtitle">Cat-Face or Puppy-Face, Which One is Yours?</h2>
     </section>
 
-    <div>Teachable Machine Image Model</div>
-    <button type="button" onclick="init()">Start</button>
-    <button type="button" onclick="predict()">predict</button>
-
     <script
       class="jsbin"
       src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
@@ -119,6 +115,8 @@
           src="#"
           alt="your image"
         />
+        <p class="result-message"></p>
+        <div id="label-container"></div>
         <div class="image-title-wrap">
           <button type="button" onclick="removeUpload()" class="remove-image">
             Remove <span class="image-title">Uploaded Image</span>
@@ -126,6 +124,7 @@
         </div>
       </div>
     </div>
+
     <section class="container chrisYoon">
       <div class="chrisYoon-cover d-flex flex-row-reverse">
         <a
@@ -136,6 +135,33 @@
       </div>
     </section>
 
+    <div id="disqus_thread"></div>
+
+    <script>
+      /**
+       *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+       *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+      (function () {
+        // DON'T EDIT BELOW THIS LINE
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://murakano-2.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript
+      >Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript"
+        >comments powered by Disqus.</a
+      ></noscript
+    >
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
@@ -151,8 +177,10 @@
 
             $('.image-title').html(input.files[0].name);
           };
-
           reader.readAsDataURL(input.files[0]);
+          init().then(() => {
+            predict();
+          });
         } else {
           removeUpload();
         }
@@ -178,7 +206,6 @@
 
       let model, webcam, labelContainer, maxPredictions;
 
-      // Load the image model and setup the webcam
       async function init() {
         const modelURL = URL + 'model.json';
         const metadataURL = URL + 'metadata.json';
@@ -202,6 +229,29 @@
         // predict can take in an image, video or canvas html element
         var image = document.getElementById('face-image');
         const prediction = await model.predict(image, false);
+        prediction.sort(
+          (a, b) => parseFloat(b.probability) - parseFloat(a.probability)
+        );
+        switch (prediction[0].className) {
+          case 'dog':
+            resultMessage = 'Dog';
+            break;
+          case 'cat':
+            resultMessage = 'Cat';
+            break;
+          case 'rabbit':
+            resultMessage = 'Rebbit';
+            break;
+          case 'dinosaur':
+            resultMessage = 'Dinosaur';
+            break;
+          case 'bear':
+            resultMessage = 'Bear';
+            break;
+          default:
+            resultMessage = 'Cannot recognize the image';
+        }
+        $('.result-message').html(resultMessage);
         for (let i = 0; i < maxPredictions; i++) {
           const classPrediction =
             prediction[i].className +
