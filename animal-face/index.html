@@ -11,6 +11,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
       rel="stylesheet"
     />
@@ -85,6 +92,23 @@
         </div>
       </div>
     </nav>
+    <div class="share-btn-container">
+      <a href="#" class="facebook-btn">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="#" class="twitter-btn">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="reddit-btn">
+        <i class="fab fa-reddit"></i>
+      </a>
+      <a href="#" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="#" class="pinterest-btn">
+        <i class="fab fa-pinterest"></i>
+      </a>
+    </div>
     <section class="section">
       <h1 class="title">Check your animal face type with AI</h1>
       <h2 class="subtitle">Cat-Face or Puppy-Face, Which One is Yours?</h2>
@@ -115,6 +139,12 @@
           src="#"
           alt="your image"
         />
+        <div id="loading" class="animated bounce">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <p class="text-center">AI is analyzing uploaded picture...</p>
+        </div>
         <p class="result-message"></p>
         <div id="label-container"></div>
         <div class="image-title-wrap">
@@ -171,7 +201,7 @@
 
           reader.onload = function (e) {
             $('.image-upload-wrap').hide();
-
+            $('#loading').show();
             $('.file-upload-image').attr('src', e.target.result);
             $('.file-upload-content').show();
 
@@ -180,6 +210,7 @@
           reader.readAsDataURL(input.files[0]);
           init().then(() => {
             predict();
+            $('#loading').hide();
           });
         } else {
           removeUpload();
@@ -266,6 +297,60 @@
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Social Share Link
+      
+    Facebook: 
+    https://www.facebook.com/sharer.php?u=[post-url]
+
+    Twitter:
+    https://twitter.com/share?url=[post-url]&text=[post-title]&via=[via]&hashtags=[hashtags]
+
+    Reddit:
+    https://reddit.com/submit?url=[post-url]&title=[post-title]
+
+    WhatsApp:
+    https://api.whatsapp.com/send?text=[post-title] [post-url]
+
+    Pinterest
+    https://pinterest.com/pin/create/bookmarklet/?media=[post-img]&url=[post-url]&is_video=[is_video]&description=[post-title]
+   
+    -->
+
+    <script>
+      const facebookBtn = document.querySelector('.facebook-btn');
+      const twitterBtn = document.querySelector('.twitter-btn');
+      const redditBtn = document.querySelector('.reddit-btn');
+      const whatsappBtn = document.querySelector('.whatsapp-btn');
+      const pinterestBtn = document.querySelector('.pinterest-btn');
+
+      function initSharing() {
+        let postUrl = encodeURI(document.location.href);
+        let postTitle = encodeURI('Hi, please check this out:');
+
+        facebookBtn.setAttribute(
+          'href',
+          `https://www.facebook.com/sharer.php?u=${postUrl}`
+        );
+        twitterBtn.setAttribute(
+          'href',
+          `https://twitter.com/share?url=${postUrl}&text=${postTitle}`
+        );
+        redditBtn.setAttribute(
+          'href',
+          `https://reddit.com/submit?url=${postUrl}`
+        );
+        whatsappBtn.setAttribute(
+          'href',
+          `https://api.whatsapp.com/send?text=${postTitle} ${postUrl}`
+        );
+        pinterestBtn.setAttribute(
+          'href',
+          `https://pinterest.com/pin/create/bookmarklet/?url=${postUrl}&description=${postTitle}`
+        );
+      }
+      initSharing();
+    </script>
   </body>
   <!-- Copyright (c) 2021 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
 
