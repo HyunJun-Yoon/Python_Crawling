@@ -146,7 +146,11 @@
           <p class="text-center">AI is analyzing uploaded picture...</p>
         </div>
         <p class="result-message"></p>
-        <div id="label-container"></div>
+        <div
+          id="label-container"
+          class="d-flex flex-column justify-content-around"
+        ></div>
+        <div id="addThis" class="addthis_inline_share_toolbox_6lz1"></div>
         <div class="image-title-wrap">
           <button type="button" onclick="removeUpload()" class="remove-image">
             Remove <span class="image-title">Uploaded Image</span>
@@ -204,7 +208,6 @@
             $('#loading').show();
             $('.file-upload-image').attr('src', e.target.result);
             $('.file-upload-content').show();
-
             $('.image-title').html(input.files[0].name);
           };
           reader.readAsDataURL(input.files[0]);
@@ -250,8 +253,9 @@
 
         labelContainer = document.getElementById('label-container');
         for (let i = 0; i < maxPredictions; i++) {
-          // and class labels
-          labelContainer.appendChild(document.createElement('div'));
+          var element = document.createElement('div');
+          element.classList.add('d-flex');
+          labelContainer.appendChild(element);
         }
       }
 
@@ -263,6 +267,7 @@
         prediction.sort(
           (a, b) => parseFloat(b.probability) - parseFloat(a.probability)
         );
+        var resultTitle, resultExplain, resultCeleb;
         switch (prediction[0].className) {
           case 'dog':
             resultMessage = 'Dog';
@@ -282,13 +287,75 @@
           default:
             resultMessage = 'Cannot recognize the image';
         }
-        $('.result-message').html(resultMessage);
+        // $('.result-message').html(resultMessage);
+        // for (let i = 0; i < maxPredictions; i++) {
+        //   const classPrediction =
+        //     prediction[i].className +
+        //     ': ' +
+        //     prediction[i].probability.toFixed(2);
+        //   labelContainer.childNodes[i].innerHTML = classPrediction;
+        // }
+
+        var title =
+          "<div class='" +
+          prediction[0].className +
+          "-animal-title'>" +
+          resultTitle +
+          '</div>';
+        var explain =
+          "<div class='animal-explain pt-2'>" + resultExplain + '</div>';
+        var celeb =
+          "<div class='" +
+          prediction[0].className +
+          "-animal-celeb pt-2 pb-2'>" +
+          resultCeleb +
+          '</div>';
+        $('.result-message').html(title + explain + celeb);
+        var barWidth;
         for (let i = 0; i < maxPredictions; i++) {
-          const classPrediction =
+          if (prediction[i].probability.toFixed(2) > 0.1) {
+            barWidth =
+              Math.round(prediction[i].probability.toFixed(2) * 100) + '%';
+          } else if (prediction[i].probability.toFixed(2) >= 0.01) {
+            barWidth = '4%';
+          } else {
+            barWidth = '2%';
+          }
+          var labelTitle;
+          switch (prediction[i].className) {
+            case 'dog':
+              labelTitle = 'Dog';
+              break;
+            case 'cat':
+              labelTitle = 'Cat';
+              break;
+            case 'rabbit':
+              labelTitle = 'Rabbit';
+              break;
+            case 'dinosaur':
+              labelTitle = 'Dinosaur';
+              break;
+            case 'bear':
+              labelTitle = 'Bear';
+              break;
+            default:
+              labelTitle = '알수없음';
+          }
+          var label =
+            "<div class='animal-label d-flex align-items-center'>" +
+            labelTitle +
+            '</div>';
+          var bar =
+            "<div class='bar-container position-relative container'><div class='" +
             prediction[i].className +
-            ': ' +
-            prediction[i].probability.toFixed(2);
-          labelContainer.childNodes[i].innerHTML = classPrediction;
+            "-box'></div><div class='d-flex justify-content-center align-items-center " +
+            prediction[i].className +
+            "-bar' style='width: " +
+            barWidth +
+            "'><span class='d-block percent-text'>" +
+            Math.round(prediction[i].probability.toFixed(2) * 100) +
+            '%</span></div></div>';
+          labelContainer.childNodes[i].innerHTML = label + bar;
         }
       }
     </script>
