@@ -201,7 +201,7 @@ body {
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: fixed;
-  top: 35.5%;
+  top: 42%;
   transform: translateY(-50%);
 }
 
@@ -210,7 +210,7 @@ body {
 }
 
 .share-btn-container a {
-  margin: 12px 0;
+  margin: 15px 0;
   transition: 500ms;
 }
 
@@ -386,7 +386,94 @@ body {
   color: #9b6b43;
   font-size: 1.2rem;
 }
+.btn {
+  position: relative;
+}
 
+.btn input {
+  position: relative;
+  margin-top: 40px;
+  width: 300px;
+  height: 40px;
+  border-radius: 4px;
+  outline: none;
+  cursor: none;
+  appearance: none;
+  font-weight: bold;
+  box-shadow: 1px 6px 11px #e0dddd;
+}
+
+.btn input:before,
+.btn input:after {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #111;
+}
+
+.btn input:before {
+  content: 'Girl Group';
+  left: 40px;
+}
+
+.btn input:after {
+  content: 'Boy Group';
+  right: 40px;
+}
+
+.btn label {
+  z-index: 1;
+  position: absolute;
+  top: 51px;
+  bottom: 17px;
+  border-radius: 10px;
+}
+
+.btn.btn-1 input {
+  transition: 0.2s -0.1s;
+}
+
+.btn.btn-1 input:checked {
+  background: #fff;
+}
+
+.btn.btn-1 input:checked:before {
+  color: #111;
+  transition: color 0.5s 0.2s;
+}
+
+.btn.btn-1 input:checked:after {
+  color: #111;
+  transition: color 0.5s;
+}
+
+.btn.btn-1 input:checked + label {
+  left: 20px;
+  right: 163px;
+  background: #ee81ae;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+.btn.btn-1 input:not(:checked) {
+  background: #fff;
+  transition: background 0.5s -0.1s;
+}
+.btn.btn-1 input:not(:checked):before {
+  color: #111;
+  transition: color 0.5s;
+}
+
+.btn.btn-1 input:not(:checked):after {
+  color: #1e1e1e;
+  transition: color 0.5s 0.2s;
+}
+
+.btn.btn-1 input:not(:checked) + label {
+  left: 157px;
+  right: 20px;
+  background: rgb(123, 171, 226);
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
 /* Media Queries */
 @media (max-width: 500px) {
   .content {
