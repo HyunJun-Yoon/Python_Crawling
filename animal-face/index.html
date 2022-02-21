@@ -32,10 +32,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light nav-distance">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light nav-distance">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Idol Group</a>
-        <button
+         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -88,10 +88,10 @@
             <button class="btn btn-outline-success" type="submit">
               Search
             </button>
-          </form>
-        </div>
+          </form> -->
+    <!-- </div>
       </div>
-    </nav>
+    </nav>  -->
     <div class="share-btn-container">
       <a href="#" class="facebook-btn">
         <i class="fab fa-facebook"></i>
@@ -111,18 +111,18 @@
     </div>
     <section class="section">
       <h1 class="title">
-        See which KPOP Idol group you can be the next member of with AI
+        See which K-POP girl group you can be the next member of with AI
       </h1>
       <!-- <h2 class="subtitle">Check Which Group is the </h2> -->
     </section>
 
     <!-- <h3 class="pb-2 d-flex justify-content-center">Girl Group Or Boy Group</h3> -->
-    <section class="d-flex justify-content-center">
+    <!-- <section class="d-flex justify-content-center">
       <span class="btn btn-1">
         <input type="checkbox" name="" id="switch" />
         <label for="switch"></label>
       </span>
-    </section>
+    </section> -->
     <script
       class="jsbin"
       src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
@@ -245,7 +245,7 @@
       // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
       // the link to your model provided by Teachable Machine export panel
-      const URL = 'https://teachablemachine.withgoogle.com/models/ulQA6KPZ4/';
+      const URL = 'https://teachablemachine.withgoogle.com/models/J-9aN9_sV/';
 
       let model, webcam, labelContainer, maxPredictions;
 
@@ -278,20 +278,28 @@
         );
         var resultTitle, resultExplain, resultCeleb;
         switch (prediction[0].className) {
-          case 'dog':
-            resultMessage = 'Dog';
+          case 'Itzy':
+            resultTitle = 'Itzy';
             break;
-          case 'cat':
-            resultMessage = 'Cat';
+          case 'Twice':
+            resultTitle = 'Twice';
             break;
-          case 'rabbit':
-            resultMessage = 'Rebbit';
+          case 'Brave Girls':
+            resultTitle = 'Brave Girls';
             break;
-          case 'dinosaur':
-            resultMessage = 'Dinosaur';
+          case 'aespa':
+            resultTitle = 'aespa';
             break;
-          case 'bear':
-            resultMessage = 'Bear';
+          case 'Red Velvet':
+            resultTitle = 'Red Velvet';
+            break;
+          case 'MAMAMOO':
+            resultTitle = 'MAMAMOO';
+            break;
+          case 'Blackpink':
+            resultTitle = 'Blackpink';
+            break;
+
             break;
           default:
             resultMessage = 'Cannot recognize the image';
@@ -313,13 +321,13 @@
           '</div>';
         var explain =
           "<div class='animal-explain pt-2'>" + resultExplain + '</div>';
-        var celeb =
-          "<div class='" +
-          prediction[0].className +
-          "-animal-celeb pt-2 pb-2'>" +
-          resultCeleb +
-          '</div>';
-        $('.result-message').html(title + explain + celeb);
+        // var celeb =
+        //   "<div class='" +
+        //   prediction[0].className +
+        //   "-animal-celeb pt-2 pb-2'>" +
+        //   resultCeleb +
+        //   '</div>';
+        $('.result-message').html(title + explain);
         var barWidth;
         for (let i = 0; i < maxPredictions; i++) {
           if (prediction[i].probability.toFixed(2) > 0.1) {
@@ -332,23 +340,30 @@
           }
           var labelTitle;
           switch (prediction[i].className) {
-            case 'dog':
-              labelTitle = 'Dog';
+            case 'Itzy':
+              labelTitle = 'Itzy';
               break;
-            case 'cat':
-              labelTitle = 'Cat';
+            case 'Twice':
+              labelTitle = 'Twice';
               break;
-            case 'rabbit':
-              labelTitle = 'Rabbit';
+            case 'Brave Girls':
+              labelTitle = 'Brave Girls';
               break;
-            case 'dinosaur':
-              labelTitle = 'Dinosaur';
+            case 'aespa':
+              labelTitle = 'aespa';
               break;
-            case 'bear':
-              labelTitle = 'Bear';
+            case 'Red Velvet':
+              labelTitle = 'Red Velvet';
               break;
+            case 'MAMAMOO':
+              labelTitle = 'MAMAMOO';
+              break;
+            case 'Blackpink':
+              labelTitle = 'Blackpink';
+              break;
+
             default:
-              labelTitle = '알수없음';
+              labelTitle = 'Cannot recognize the image';
           }
           var label =
             "<div class='animal-label d-flex align-items-center'>" +

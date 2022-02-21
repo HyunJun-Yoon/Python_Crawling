@@ -2,7 +2,7 @@ from google_images_download import google_images_download
 
 response = google_images_download.googleimagesdownload()  
 
-arguments = {"keywords":"워너원 강다니엘, 엑소 백현, 박보검, 송중기, 워너원 황민현, 엑소 시우민, 강동원, 이종석, 이준기, 마동석, 조진웅, 조세호, 안재홍, 윤두준, 이민기, 김우빈, 육성재, 공유, 방탄소년단 정국, 아이콘 바비, 워너원 박지훈, 엑소 수호","limit":50,"print_urls":True, "format": "jpg"}   
+arguments = {"keywords":"블랙핑크 제니, 블랙핑크 지수, 블랙핑크 로제, 블랙핑크 리사, 레드벨벳 조이, 레드벨벳 슬기, 레드벨벳 예리, 레드벨벳 웬디, 레드벨벳 아이린", "limit":50,"print_urls":True, "format": "jpg"}   
 
 paths = response.download(arguments) 
 
